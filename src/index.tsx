@@ -67,10 +67,20 @@ app.get('/privacy', (c) => html(privacyPage()))
 app.get('/terms', (c) => html(termsPage()))
 app.get('/security', (c) => html(securityPage()))
 
+import {
+  diyInterviewPage, diyDocumentsPage, diyDiagnosticsPage,
+  diyEscalatePage, diyEfilePage, diyStatusPage
+} from './pages/diyFullPages'
+
 // ── Baddies Tax DIY™ Consumer Filing Platform ─────────────────
 app.get('/diy', (c) => html(diyPortalPage()))
 app.get('/diy/portal', (c) => html(diyPortalPage()))
-app.get('/diy/interview', (c) => html(diyPortalPage()))
+app.get('/diy/interview', (c) => html(diyInterviewPage()))
+app.get('/diy/documents', (c) => html(diyDocumentsPage()))
+app.get('/diy/diagnostics', (c) => html(diyDiagnosticsPage()))
+app.get('/diy/escalate', (c) => html(diyEscalatePage()))
+app.get('/diy/efile', (c) => html(diyEfilePage()))
+app.get('/diy/status', (c) => html(diyStatusPage()))
 
 // ── Internal App Command Dashboard Pages (Protected) ───────────
 app.get('/dashboard', (c) => html(dashboardPage()))
