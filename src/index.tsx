@@ -24,6 +24,7 @@ import { fleetPage } from './pages/fleet'
 import { brandApi, mcp, llmsTxt } from './brandapi'
 import { docsPage } from './pages/docs'
 import { taxAgencyInABoxPage } from './pages/agencyInABox'
+import { diyPortalPage } from './pages/diyPortal'
 import { FUNNEL_SLUGS } from './funnels'
 import { TEMPLATES } from './templateRegistry'
 import { getCopyOverrides, trackView, maybeRefreshFunnel } from './agents'
@@ -34,8 +35,11 @@ const app = new Hono<{ Bindings: AppBindings }>()
 const html = (body: string) =>
   new Response(body, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
 
-// ── Baddies Tax OS™ Command Pages & Sales Funnel ──────────────
+// ── Baddies Tax OS™ Command Pages & DIY Platform ─────────────
 app.get('/', (c) => html(dashboardPage()))
+app.get('/diy', (c) => html(diyPortalPage()))
+app.get('/diy/portal', (c) => html(diyPortalPage()))
+app.get('/diy/interview', (c) => html(diyPortalPage()))
 app.get('/tax-agency-in-a-box', (c) => html(taxAgencyInABoxPage()))
 app.get('/start-a-tax-business', (c) => html(taxAgencyInABoxPage()))
 app.get('/tax-business-software', (c) => html(taxAgencyInABoxPage()))

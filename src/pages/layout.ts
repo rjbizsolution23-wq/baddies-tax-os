@@ -81,6 +81,7 @@ ${extraHead}
     <div class="flex items-center gap-1 text-sm flex-wrap">
       ${[
         ['/', 'Tax Command', 'dashboard'],
+        ['/diy', 'Tax DIY Filing', 'tax'],
         ['/tax-agency-in-a-box', 'Agency-in-a-Box', 'builder'],
         ['/tax', 'Tax Prep Hub', 'tax'],
         ['/resolution', 'Tax Resolution', 'resolution'],

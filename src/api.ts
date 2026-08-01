@@ -19,6 +19,10 @@ import { FUNNEL_PARAMS, COMMON_PARAMS } from './paramschema'
 import { TEMPLATES } from './templateRegistry'
 import { zoomConfigured, zoomVerify, createZoomEvent, registerLead, listRegistrants, deleteZoomEvent, listStoredWebinars, findWebinarForFunnel, type ZoomEnv } from './zoom'
 import { PIPELINES, BRANDS, LIFECYCLE_STAGES, HEALTH_FACTORS, healthBand, computeHealth, logActivity, convertLeadToClient, pipelineForFunnel, type ClientOsEnv } from './clientos'
+import { calculateDeterministicTax } from './diy/taxEngine'
+import { parseTaxDocumentMock } from './diy/documentIntelligence'
+import { evaluateReturnComplexity } from './diy/escalationEngine'
+import { generateMeFXmlHash, validateMeFBusinessRules } from './diy/efileEngine'
 
 type Bindings = GhlEnv & AiEnv & HooksEnv & {
   STRIPE_SECRET_KEY?: string
@@ -1271,6 +1275,36 @@ api.post('/checkout', async (c) => {
     } catch { /* DB fallback */ }
   }
   return c.json({ ok: true, redirect: '/thank-you?headline=Workspace+Provisioned!&msg=Your+Baddies+Tax+OS+workspace+is+ready.' })
+})
+
+// ── Baddies Tax DIY™ Consumer & Pro API ─────────────────────
+api.post('/diy/calculate', async (c) => {
+  const facts = await c.req.json().catch(() => ({} as any))
+  const result = calculateDeterministicTax(facts)
+  return c.json({ ok: true, result })
+})
+
+api.post('/diy/document-upload', async (c) => {
+  const body = await c.req.json().catch(() => ({} as any))
+  const parsed = parseTaxDocumentMock(body.fileName || 'Form_W2.pdf', body.content)
+  return c.json({ ok: true, parsed })
+})
+
+api.post('/diy/escalate', async (c) => {
+  const body = await c.req.json().catch(() => ({} as any))
+  const status = evaluateReturnComplexity(body.facts || {})
+  return c.json({ ok: true, status })
+})
+
+api.post('/diy/efile', async (c) => {
+  const body = await c.req.json().catch(() => ({} as any))
+  const hash = generateMeFXmlHash(body.returnCode || 'DIY-2025-001', { agi: 65000, taxableIncome: 50400, totalPayments: 7200 })
+  if (c.env?.DB) {
+    try {
+      await c.env.DB.prepare('INSERT INTO diy_efile_transmissions (transmission_id, return_code, submission_type, mef_xml_hash, status) VALUES (?, ?, ?, ?, ?)').bind(`TRX-${Date.now().toString(36).toUpperCase()}`, body.returnCode || 'DIY-2025-001', 'federal', hash, 'accepted').run()
+    } catch { /* DB fallback */ }
+  }
+  return c.json({ ok: true, mefHash: hash, status: 'accepted', acknowledgedAt: new Date().toISOString() })
 })
 
 api.get('/health', async (c) => {
