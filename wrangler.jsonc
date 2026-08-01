@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "baddies-tax-os",
+  "compatibility_date": "2026-08-01",
+  "pages_build_output_dir": "./dist",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  // ── Cloudflare D1 — Baddies Tax OS Permanent Storage ──
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "baddies-tax-os-db",
+      "database_id": "58480f67-4065-443f-8e87-cf95d20fd002"
+    }
+  ],
+  // ── Workers AI — Governed Tax Agent Workforce ──
+  "ai": {
+    "binding": "AI"
+  }
+}

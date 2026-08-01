@@ -1,0 +1,43 @@
+# RJ Funnel Command Center — local secrets (copy to .dev.vars, never commit .dev.vars)
+# Production: npx wrangler pages secret put STRIPE_SECRET_KEY (etc.)
+STRIPE_SECRET_KEY=sk_test_xxx
+RESEND_API_KEY=re_xxx
+LEAD_NOTIFY_EMAIL=support@rjbusinesssolutions.org
+LEAD_FROM_EMAIL=RJ Funnels <leads@rjbusinesssolutions.org>
+
+# ── GoHighLevel (LeadConnector API v2) ──
+# GHL sub-account → Settings → Private Integrations → create token
+# Scopes: contacts.write, contacts.readonly, opportunities.write, locations.readonly, workflows.readonly
+GHL_API_KEY=pit-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+GHL_LOCATION_ID=your_location_id
+# Optional — auto-create an opportunity for every lead:
+# GHL_PIPELINE_ID=xxx
+# GHL_STAGE_ID=xxx
+# Optional — enroll every lead into a workflow:
+# GHL_WORKFLOW_ID=xxx
+
+# ── v3.4: Lead Fan-Out channels (all optional — set only what you use) ──
+# Zapier / Make / n8n / any custom webhook (receives JSON {event, at, funnel, lead})
+LEAD_WEBHOOK_URL=https://hooks.zapier.com/hooks/catch/xxx/yyy
+# Slack Incoming Webhook (api.slack.com/apps → Incoming Webhooks)
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/T000/B000/XXXX
+# Discord channel webhook (Channel → Integrations → Webhooks)
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/xxx/yyy
+# Telegram bot alerts (@BotFather token + your chat id from /getUpdates)
+TELEGRAM_BOT_TOKEN=123456:ABC-xxx
+TELEGRAM_CHAT_ID=123456789
+# Twilio SMS speed-to-lead alerts
+TWILIO_ACCOUNT_SID=ACxxxxxxxx
+TWILIO_AUTH_TOKEN=xxxxxxxx
+TWILIO_FROM=+15055550100
+TWILIO_TO=+15055550199
+# Airtable — append every lead as a row (PAT with data.records:write)
+AIRTABLE_API_KEY=patXXXX.xxxx
+AIRTABLE_BASE_ID=appXXXXXXXX
+AIRTABLE_TABLE=Leads
+
+# ── v3.5 Enterprise security ──────────────────────────────────
+# Locks /api/leads, /api/leads/stats, /api/leads/:id, /api/leads/export.csv,
+# /api/links (GET) and /api/ai/insights behind a key. Leave unset = open (dev).
+# Production: npx wrangler pages secret put ADMIN_API_KEY --project-name mcknight-growthos
+ADMIN_API_KEY=pick-a-long-random-string
