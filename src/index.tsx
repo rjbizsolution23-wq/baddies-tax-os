@@ -3,7 +3,7 @@ import { dashboardPage } from './pages/dashboard'
 import { taxPage } from './pages/tax'
 import { creditPage } from './pages/credit'
 import { emailsPage } from './pages/emails'
-import { compliancePage } from './pages/compliance'
+import { compliancePage as complianceAppPage } from './pages/compliance'
 import { builderPage } from './pages/builder'
 import { brandPage } from './pages/brand'
 import { seoPage } from './pages/seo'
@@ -14,7 +14,7 @@ import { passportPage } from './pages/passport'
 import { api, INDEXNOW_KEY } from './api'
 import { agentsPage } from './pages/agents'
 import { mailerPage } from './pages/mailer'
-import { analyticsPage } from './pages/analytics'
+import { analyticsPage as analyticsAppPage } from './pages/analytics'
 import { deployPage } from './pages/deploy'
 import { webinarsPage } from './pages/webinars'
 import { clientsPage } from './pages/clients'
@@ -25,6 +25,11 @@ import { brandApi, mcp, llmsTxt } from './brandapi'
 import { docsPage } from './pages/docs'
 import { taxAgencyInABoxPage } from './pages/agencyInABox'
 import { diyPortalPage } from './pages/diyPortal'
+import {
+  funnelStudioPage, taxpayerCrmPage, clientPortalPage, workflowsPage,
+  automationPage, compliancePage, aiAgentsPage, academyPage,
+  analyticsPage, demoPage, pricingPage, privacyPage, termsPage, securityPage
+} from './pages/standaloneFeaturePages'
 import { FUNNEL_SLUGS } from './funnels'
 import { TEMPLATES } from './templateRegistry'
 import { getCopyOverrides, trackView, maybeRefreshFunnel } from './agents'
@@ -35,11 +40,8 @@ const app = new Hono<{ Bindings: AppBindings }>()
 const html = (body: string) =>
   new Response(body, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
 
-// ── Baddies Tax OS™ Command Pages & DIY Platform ─────────────
-app.get('/', (c) => html(dashboardPage()))
-app.get('/diy', (c) => html(diyPortalPage()))
-app.get('/diy/portal', (c) => html(diyPortalPage()))
-app.get('/diy/interview', (c) => html(diyPortalPage()))
+// ── Standalone Sales Funnel & Marketing Routes (Detached from App) ──
+app.get('/', (c) => html(taxAgencyInABoxPage()))
 app.get('/tax-agency-in-a-box', (c) => html(taxAgencyInABoxPage()))
 app.get('/start-a-tax-business', (c) => html(taxAgencyInABoxPage()))
 app.get('/tax-business-software', (c) => html(taxAgencyInABoxPage()))
@@ -48,12 +50,37 @@ app.get('/tax-service-bureau-platform', (c) => html(taxAgencyInABoxPage()))
 app.get('/tax-firm-growth-system', (c) => html(taxAgencyInABoxPage()))
 app.get('/baddies-tax-os', (c) => html(taxAgencyInABoxPage()))
 app.get('/launch-your-tax-agency', (c) => html(taxAgencyInABoxPage()))
+
+// ── Standalone Marketing Feature Pages ─────────────────────────
+app.get('/features/funnel-studio', (c) => html(funnelStudioPage()))
+app.get('/features/taxpayer-crm', (c) => html(taxpayerCrmPage()))
+app.get('/features/client-portal', (c) => html(clientPortalPage()))
+app.get('/features/workflows', (c) => html(workflowsPage()))
+app.get('/features/automation', (c) => html(automationPage()))
+app.get('/features/compliance', (c) => html(compliancePage()))
+app.get('/features/ai-agents', (c) => html(aiAgentsPage()))
+app.get('/features/academy', (c) => html(academyPage()))
+app.get('/features/analytics', (c) => html(analyticsPage()))
+app.get('/demo', (c) => html(demoPage()))
+app.get('/pricing', (c) => html(pricingPage()))
+app.get('/privacy', (c) => html(privacyPage()))
+app.get('/terms', (c) => html(termsPage()))
+app.get('/security', (c) => html(securityPage()))
+
+// ── Baddies Tax DIY™ Consumer Filing Platform ─────────────────
+app.get('/diy', (c) => html(diyPortalPage()))
+app.get('/diy/portal', (c) => html(diyPortalPage()))
+app.get('/diy/interview', (c) => html(diyPortalPage()))
+
+// ── Internal App Command Dashboard Pages (Protected) ───────────
+app.get('/dashboard', (c) => html(dashboardPage()))
+app.get('/app', (c) => html(dashboardPage()))
 app.get('/tax', (c) => html(taxPage()))
 app.get('/resolution', (c) => html(creditPage()))
 app.get('/credit', (c) => html(creditPage()))
 app.get('/events', (c) => html(webinarsPage()))
 app.get('/emails', (c) => html(emailsPage()))
-app.get('/compliance', (c) => html(compliancePage()))
+app.get('/compliance-app', (c) => html(complianceAppPage()))
 app.get('/builder', (c) => html(builderPage()))
 app.get('/brand', (c) => html(brandPage()))
 app.get('/seo', (c) => html(seoPage()))
@@ -69,7 +96,7 @@ app.get('/credentials', (c) => html(passportPage()))
 app.get('/passport', (c) => html(passportPage()))
 app.get('/agents', (c) => html(agentsPage()))
 app.get('/mailer', (c) => html(mailerPage()))
-app.get('/analytics', (c) => html(analyticsPage()))
+app.get('/analytics-app', (c) => html(analyticsAppPage()))
 app.get('/deploy', (c) => html(deployPage()))
 app.get('/webinars', (c) => html(webinarsPage()))
 app.get('/clients', (c) => html(clientsPage()))

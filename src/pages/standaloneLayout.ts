@@ -1,5 +1,5 @@
 // Standalone Sales Funnel Layout Shell for Baddies Tax OS™
-// Renders high-converting standalone pages without internal SaaS app dashboard navigation clutter.
+// Renders high-converting standalone pages completely detached from internal Tax OS dashboard links.
 
 export const standaloneShell = (title: string, content: string) => `<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -52,7 +52,7 @@ tailwind.config = {
 </head>
 <body class="bg-slate-950 text-gray-100 min-h-screen flex flex-col justify-between selection:bg-emerald-600 selection:text-white">
 
-<!-- STANDALONE SALES FUNNEL NAVIGATION HEADER -->
+<!-- STANDALONE SALES FUNNEL NAVIGATION HEADER (DETACHED FROM APP) -->
 <header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-emerald-500/20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
     <!-- Brand Logo -->
@@ -66,22 +66,22 @@ tailwind.config = {
       </div>
     </a>
 
-    <!-- Standalone Nav Links -->
-    <nav class="hidden md:flex items-center gap-8 text-xs font-bold text-gray-300">
-      <a href="#features" class="hover:text-emerald-400 transition-colors">Platform Features</a>
-      <a href="#transformation" class="hover:text-emerald-400 transition-colors">Why Baddies OS</a>
-      <a href="#roi-calculator" class="hover:text-emerald-400 transition-colors">ROI Calculator</a>
-      <a href="#pricing" class="hover:text-emerald-400 transition-colors">Pricing Plans</a>
-      <a href="#faq" class="hover:text-emerald-400 transition-colors">FAQ</a>
+    <!-- Standalone Nav Links (All Active Standalone Marketing Pages) -->
+    <nav class="hidden md:flex items-center gap-6 text-xs font-bold text-gray-300">
+      <a href="/features/funnel-studio" class="hover:text-emerald-400 transition-colors">Funnel Studio</a>
+      <a href="/features/taxpayer-crm" class="hover:text-emerald-400 transition-colors">Taxpayer CRM</a>
+      <a href="/features/client-portal" class="hover:text-emerald-400 transition-colors">Client Portal</a>
+      <a href="/features/compliance" class="hover:text-emerald-400 transition-colors">Compliance</a>
+      <a href="/pricing" class="hover:text-emerald-400 transition-colors">Pricing</a>
       <a href="/diy" class="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1 font-extrabold"><i class="fas fa-calculator text-[10px]"></i> DIY Consumer Portal</a>
     </nav>
 
     <!-- CTAs -->
     <div class="flex items-center gap-3">
-      <a href="/" class="hidden sm:inline-flex bg-slate-900 hover:bg-slate-800 text-gray-300 font-semibold px-4 py-2.5 rounded-xl text-xs border border-gray-800 hover:border-gray-700">
-        <i class="fas fa-gauge text-emerald-400 mr-1.5"></i> App Command
+      <a href="/demo" class="hidden sm:inline-flex bg-slate-900 hover:bg-slate-800 text-gray-300 font-semibold px-4 py-2.5 rounded-xl text-xs border border-gray-800 hover:border-gray-700">
+        <i class="fas fa-calendar-alt text-emerald-400 mr-1.5"></i> Book Demo
       </a>
-      <a href="#pricing" onclick="openAssessmentModal()" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl shadow-lg shadow-emerald-500/20 transition-all transform hover:-translate-y-0.5">
+      <a href="/tax-agency-in-a-box#pricing" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl shadow-lg shadow-emerald-500/20 transition-all transform hover:-translate-y-0.5">
         Build My Tax Agency
       </a>
     </div>
@@ -93,7 +93,7 @@ tailwind.config = {
   ${content}
 </main>
 
-<!-- STANDALONE SALES FUNNEL FOOTER -->
+<!-- STANDALONE SALES FUNNEL FOOTER (DETACHED FROM APP) -->
 <footer class="bg-slate-950 border-t border-gray-800 py-16 text-xs text-gray-400">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
@@ -115,14 +115,17 @@ tailwind.config = {
 
       <!-- Col 2: Platform Links -->
       <div>
-        <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-3">Platform Solutions</h4>
+        <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-3">Platform Features</h4>
         <ul class="space-y-2 text-xs">
-          <li><a href="#features" class="hover:text-emerald-400">Tax Funnel Studio</a></li>
-          <li><a href="#features" class="hover:text-emerald-400">Taxpayer CRM</a></li>
-          <li><a href="#features" class="hover:text-emerald-400">Client Intake &amp; Portal</a></li>
-          <li><a href="#features" class="hover:text-emerald-400">Tax Workflow Operations</a></li>
-          <li><a href="#features" class="hover:text-emerald-400">Compliance Command</a></li>
-          <li><a href="#features" class="hover:text-emerald-400">Tax AI Agent Workforce</a></li>
+          <li><a href="/features/funnel-studio" class="hover:text-emerald-400">Tax Funnel Studio™</a></li>
+          <li><a href="/features/taxpayer-crm" class="hover:text-emerald-400">Taxpayer CRM™</a></li>
+          <li><a href="/features/client-portal" class="hover:text-emerald-400">Client Intake &amp; Portal™</a></li>
+          <li><a href="/features/workflows" class="hover:text-emerald-400">Tax Workflow Operations™</a></li>
+          <li><a href="/features/automation" class="hover:text-emerald-400">Email, SMS &amp; Zoom Automation™</a></li>
+          <li><a href="/features/compliance" class="hover:text-emerald-400">Compliance Command™</a></li>
+          <li><a href="/features/ai-agents" class="hover:text-emerald-400">Tax AI Agent Workforce™</a></li>
+          <li><a href="/features/academy" class="hover:text-emerald-400">Baddies Tax Academy™</a></li>
+          <li><a href="/features/analytics" class="hover:text-emerald-400">Practice Intelligence™</a></li>
         </ul>
       </div>
 
@@ -131,22 +134,23 @@ tailwind.config = {
         <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-3">Consumer &amp; Pro Portals</h4>
         <ul class="space-y-2 text-xs">
           <li><a href="/diy" class="hover:text-amber-400 text-amber-400 font-bold">Baddies Tax DIY™ Filing Portal</a></li>
-          <li><a href="#pricing" class="hover:text-emerald-400">Baddies Launch Plan ($197/mo)</a></li>
-          <li><a href="#pricing" class="hover:text-emerald-400">Baddies Growth Plan ($497/mo)</a></li>
-          <li><a href="#pricing" class="hover:text-emerald-400">Baddies Agency Pro ($997/mo)</a></li>
-          <li><a href="#pricing" class="hover:text-emerald-400">Service Bureau Network</a></li>
+          <li><a href="/pricing" class="hover:text-emerald-400">Baddies Launch Plan ($197/mo)</a></li>
+          <li><a href="/pricing" class="hover:text-emerald-400">Baddies Growth Plan ($497/mo)</a></li>
+          <li><a href="/pricing" class="hover:text-emerald-400">Baddies Agency Pro ($997/mo)</a></li>
+          <li><a href="/pricing" class="hover:text-emerald-400">Service Bureau Network</a></li>
+          <li><a href="/demo" class="hover:text-emerald-400">Schedule Live 1-on-1 Demo</a></li>
         </ul>
       </div>
 
       <!-- Col 4: Legal & Compliance -->
       <div>
-        <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-3">Legal &amp; Compliance</h4>
+        <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-3">Legal &amp; Security</h4>
         <ul class="space-y-2 text-xs">
-          <li><a href="/compliance" class="hover:text-emerald-400">IRC §7216 Consent Standard</a></li>
-          <li><a href="/compliance" class="hover:text-emerald-400">IRS Circular 230 Notice</a></li>
-          <li><a href="/compliance" class="hover:text-emerald-400">GLBA WISP Encryption</a></li>
-          <li><a href="/compliance" class="hover:text-emerald-400">PTIN / EFIN Requirements</a></li>
-          <li><a href="/docs" class="hover:text-emerald-400">Terms of Service &amp; Privacy</a></li>
+          <li><a href="/privacy" class="hover:text-emerald-400">Privacy Policy &amp; IRC §7216</a></li>
+          <li><a href="/terms" class="hover:text-emerald-400">Terms of Service &amp; Operational Policy</a></li>
+          <li><a href="/security" class="hover:text-emerald-400">GLBA WISP Security Safeguards</a></li>
+          <li><a href="/features/compliance" class="hover:text-emerald-400">IRS Circular 230 Disclosure</a></li>
+          <li><a href="/features/compliance" class="hover:text-emerald-400">PTIN &amp; EFIN Credentials</a></li>
         </ul>
       </div>
     </div>
