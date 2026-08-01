@@ -1,6 +1,6 @@
-import { shell } from './layout'
+import { diyStandaloneShell } from './diyStandaloneLayout'
 
-export const diyPortalPage = () => shell('Baddies Tax DIY™ — AI-Guided Filing & Escalation Center', 'tax', `
+export const diyPortalPage = () => diyStandaloneShell('Baddies Tax DIY™ — AI-Guided Filing & Escalation Center', `
 <!-- Top Real-Time Tax Ticker Bar -->
 <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950 border-b border-emerald-500/30 p-4 mb-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
   <div class="flex items-center gap-3">
