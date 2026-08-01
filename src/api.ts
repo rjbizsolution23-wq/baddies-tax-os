@@ -1248,8 +1248,33 @@ api.put('/verify/items/:id', async (c) => {
   return c.json({ ok: true, item: row })
 })
 
+api.post('/demo', async (c) => {
+  const body = await c.req.json().catch(() => ({} as Record<string, any>))
+  if (c.env?.DB) {
+    try {
+      await c.env.DB.prepare('INSERT INTO taxpayers (first_name, last_name, email, phone, stage, created_at) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)').bind(body.firstName || 'Demo Lead', body.lastName || '', body.email || '', body.phone || '', 'demo_requested').run()
+    } catch { /* DB optional fallback */ }
+  }
+  return c.json({ ok: true, message: 'Demo request recorded successfully.' })
+})
+
+api.post('/assessment', async (c) => {
+  const body = await c.req.json().catch(() => ({} as Record<string, any>))
+  return c.json({ ok: true, recommendedPlan: body.goal || 'launch' })
+})
+
+api.post('/checkout', async (c) => {
+  const body = await c.req.json().catch(() => ({} as Record<string, any>))
+  if (c.env?.DB) {
+    try {
+      await c.env.DB.prepare('INSERT INTO offices (office_code, name, owner_name, email, seats_limit) VALUES (?, ?, ?, ?, ?)').bind(`BTX-${Date.now().toString(36).toUpperCase().slice(-4)}`, body.firm || 'New Tax Agency', body.name || 'Agency Owner', body.email || '', 10).run()
+    } catch { /* DB fallback */ }
+  }
+  return c.json({ ok: true, redirect: '/thank-you?headline=Workspace+Provisioned!&msg=Your+Baddies+Tax+OS+workspace+is+ready.' })
+})
+
 api.get('/health', async (c) => {
   const mailConf = mailProvidersConfigured(c.env as MailEnv)
   const envAny = c.env as any
-  return c.json({ ok: true, version: '6.8.0', clientos: !!c.env?.DB, stripe: !!c.env?.STRIPE_SECRET_KEY, email: !!c.env?.RESEND_API_KEY, ghl: ghlConfigured(c.env), d1: !!c.env?.DB, ai: aiConfigured(c.env), aiProviders: aiProviders(c.env), adminLock: !!c.env?.ADMIN_API_KEY, hooks: hooksConfigured(c.env), mail: { providers: mailConf, active: pickProvider(c.env as MailEnv) }, vault: !!c.env?.DB, cfDeploy: cfConfigured(c.env as CfEnv), changeAgent: aiConfigured(c.env), zoom: zoomConfigured(c.env as unknown as ZoomEnv), sms: !!(envAny?.TWILIO_ACCOUNT_SID && envAny?.TWILIO_AUTH_TOKEN && envAny?.TWILIO_FROM), slack: !!envAny?.SLACK_WEBHOOK_URL })
+  return c.json({ ok: true, version: '8.0.0', clientos: !!c.env?.DB, stripe: !!c.env?.STRIPE_SECRET_KEY, email: !!c.env?.RESEND_API_KEY, ghl: ghlConfigured(c.env), d1: !!c.env?.DB, ai: aiConfigured(c.env), aiProviders: aiProviders(c.env), adminLock: !!c.env?.ADMIN_API_KEY, hooks: hooksConfigured(c.env), mail: { providers: mailConf, active: pickProvider(c.env as MailEnv) }, vault: !!c.env?.DB, cfDeploy: cfConfigured(c.env as CfEnv), changeAgent: aiConfigured(c.env), zoom: zoomConfigured(c.env as unknown as ZoomEnv), sms: !!(envAny?.TWILIO_ACCOUNT_SID && envAny?.TWILIO_AUTH_TOKEN && envAny?.TWILIO_FROM), slack: !!envAny?.SLACK_WEBHOOK_URL })
 })

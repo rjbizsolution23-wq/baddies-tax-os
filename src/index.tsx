@@ -23,6 +23,7 @@ import { trafficPage } from './pages/traffic'
 import { fleetPage } from './pages/fleet'
 import { brandApi, mcp, llmsTxt } from './brandapi'
 import { docsPage } from './pages/docs'
+import { taxAgencyInABoxPage } from './pages/agencyInABox'
 import { FUNNEL_SLUGS } from './funnels'
 import { TEMPLATES } from './templateRegistry'
 import { getCopyOverrides, trackView, maybeRefreshFunnel } from './agents'
@@ -33,8 +34,16 @@ const app = new Hono<{ Bindings: AppBindings }>()
 const html = (body: string) =>
   new Response(body, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
 
-// ── Baddies Tax OS™ Command Pages ──────────────────────────────
+// ── Baddies Tax OS™ Command Pages & Sales Funnel ──────────────
 app.get('/', (c) => html(dashboardPage()))
+app.get('/tax-agency-in-a-box', (c) => html(taxAgencyInABoxPage()))
+app.get('/start-a-tax-business', (c) => html(taxAgencyInABoxPage()))
+app.get('/tax-business-software', (c) => html(taxAgencyInABoxPage()))
+app.get('/tax-office-automation', (c) => html(taxAgencyInABoxPage()))
+app.get('/tax-service-bureau-platform', (c) => html(taxAgencyInABoxPage()))
+app.get('/tax-firm-growth-system', (c) => html(taxAgencyInABoxPage()))
+app.get('/baddies-tax-os', (c) => html(taxAgencyInABoxPage()))
+app.get('/launch-your-tax-agency', (c) => html(taxAgencyInABoxPage()))
 app.get('/tax', (c) => html(taxPage()))
 app.get('/resolution', (c) => html(creditPage()))
 app.get('/credit', (c) => html(creditPage()))
