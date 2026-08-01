@@ -1,7 +1,7 @@
-import { shell } from './layout'
+import { standaloneShell } from './standaloneLayout'
 import { DEFAULT_PRICING_PLANS, OPTIONAL_ADD_ONS } from '../pricingConfig'
 
-export const taxAgencyInABoxPage = () => shell('Tax Agency-in-a-Box | Baddies Tax OS™', 'builder', `
+export const taxAgencyInABoxPage = () => standaloneShell('Baddies Tax OS™ | Complete Tax Agency-in-a-Box Platform', `
 <!-- 1. Announcement Bar -->
 <div class="bg-gradient-to-r from-emerald-900 via-emerald-700 to-amber-600 text-white text-xs font-semibold py-2.5 px-4 text-center border-b border-emerald-500/30 flex items-center justify-center gap-2">
   <span class="bg-amber-400 text-slate-950 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full">New Platform</span>
